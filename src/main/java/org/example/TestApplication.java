@@ -1,8 +1,10 @@
 package org.example;
 
-import io.dropwizard.core.Application;
-import io.dropwizard.core.setup.Bootstrap;
-import io.dropwizard.core.setup.Environment;
+import io.dropwizard.Application;
+import io.dropwizard.setup.Bootstrap;
+import io.dropwizard.setup.Environment;
+import io.federecio.dropwizard.swagger.SwaggerBundle;
+import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
 import org.example.controllers.TestController;
 import org.example.daos.TestDao;
 import org.example.services.TestService;
@@ -15,12 +17,17 @@ public class TestApplication extends Application<TestConfiguration> {
 
     @Override
     public String getName() {
-        return "true";
+        return "Test";
     }
 
     @Override
     public void initialize(final Bootstrap<TestConfiguration> bootstrap) {
-        // TODO: application initialization
+        bootstrap.addBundle(new SwaggerBundle<>() {
+            @Override
+            protected SwaggerBundleConfiguration getSwaggerBundleConfiguration(TestConfiguration configuration) {
+                return configuration.getSwagger();
+            }
+        });
     }
 
     @Override
