@@ -35,12 +35,18 @@ DB_NAME - the prod db password
 4. Ensure migration successfully runs against prod database
 
 
-How to start the true application
+How to start the test application
 ---
-
+1. Set the following environment variables:
+   1. DB_USERNAME
+   2. DB_PASSWORD
+   3. DB_HOST
+   4. DB_NAME
 1. Run `mvn clean install` to build your application
-1. Start application with `java -jar target/java-swagger-flyway-starter-org.kainos.ea.jar server config.yml`
-1. To check that your application is running enter url `http://localhost:8080`
+1. You can start application via:
+   1. Terminal: `java -jar target/java-swagger-flyway-starter-org.kainos.ea.jar server config.yml`
+   2. IDE: Edit run configuration -> Add `server` to program arguments -> Run
+1. To check that your application is running enter url `http://localhost:8080/api/test`
 
 Health Check
 ---
