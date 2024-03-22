@@ -8,10 +8,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TestDao {
+    /**
+     * testConnection.
+     * @return List of database names
+     * @throws SQLException
+     */
     public List<String> testConnection() throws SQLException {
         List<String> databases = new ArrayList<>();
 
-        try(Connection connection = DatabaseConnector.getConnection()) {
+        try (Connection connection = DatabaseConnector.getConnection()) {
             Statement statement = connection.createStatement();
 
             ResultSet resultSet = statement.executeQuery(

@@ -15,10 +15,18 @@ import java.sql.SQLException;
 public class TestController {
     TestService testService;
 
-    public TestController(TestService testService) {
+    /**
+     * Constructor.
+     * @param testService
+     */
+    public TestController(final TestService testService) {
         this.testService = testService;
     }
 
+    /**
+     * testConnection.
+     * @return Response
+     */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response testConnection() {
