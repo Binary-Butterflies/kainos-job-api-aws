@@ -5,22 +5,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public final class DatabaseConnector {
-    /**
-     * Connection.
-     */
     private static Connection conn;
-
-    /**
-     * DatabaseConnector.
-     */
-    private DatabaseConnector() {
-    }
-
-    /**
-     * getConnection.
-     * @return Connection
-     * @throws SQLException
-     */
+    private DatabaseConnector() { }
     public static Connection getConnection() throws SQLException {
 
         if (conn != null && !conn.isClosed()) {

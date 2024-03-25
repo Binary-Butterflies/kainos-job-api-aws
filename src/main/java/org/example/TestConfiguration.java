@@ -8,18 +8,10 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 public class TestConfiguration extends Configuration {
-    /**
-     * SwaggerBundleConfiguration.
-     */
     @Valid
     @NotNull
     private final SwaggerBundleConfiguration swagger =
             new SwaggerBundleConfiguration();
-
-    /**
-     * getSwagger.
-     * @return swagger
-     */
     @JsonProperty("swagger")
     public SwaggerBundleConfiguration getSwagger() {
         swagger.setResourcePackage("org.example.controllers");
