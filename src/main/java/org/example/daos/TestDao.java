@@ -11,7 +11,7 @@ public class TestDao {
     public List<String> testConnection() throws SQLException {
         List<String> databases = new ArrayList<>();
 
-        try(Connection connection = DatabaseConnector.getConnection()) {
+        try (Connection connection = DatabaseConnector.getConnection()) {
             Statement statement = connection.createStatement();
 
             ResultSet resultSet = statement.executeQuery(

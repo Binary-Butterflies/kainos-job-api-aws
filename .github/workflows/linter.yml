@@ -6,10 +6,12 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Flyway Migration
+name: Java Linter
 
 on:
   push:
+    branches: [ "main" ]
+  pull_request:
     branches: [ "main" ]
 
 jobs:
@@ -25,10 +27,5 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
           cache: maven
-      - name: Run migrations
-        env:
-          FLYWAY_PASSWORD: ${{ secrets.DB_PASSWORD }}
-          FLYWAY_USER: ${{ secrets.DB_USERNAME }}
-          FLYWAY_URL: jdbc:mysql://${{ secrets.DB_HOST }}/${{ secrets.DB_NAME }}
-          FLYWAY_BASELINE_ON_MIGRATE: true
-        run: mvn flyway:migrate
+      - name: Run checkstyle
+        run: mvn checkstyle:check
