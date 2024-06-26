@@ -34,7 +34,7 @@ Database Migration - Production
 DB_USERNAME - the prod db username
 DB_PASSWORD - the prod db password
 DB_HOST - the prod db host
-DB_NAME - the prod db password
+DB_NAME - the prod db name
 ```
 
 2. Raise a pull request with your script in the `resources.db.migration` directory
