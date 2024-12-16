@@ -2,14 +2,14 @@ package org.example.models;
 
 public class User {
     String email;
-    byte[] password;
+    byte[] passwordHash;
     byte[] salt;
 
     public User(final String email,
-                final byte[] password,
+                final byte[] passwordHash,
                 final byte[] salt) {
         this.email = email;
-        this.password = password;
+        this.passwordHash = passwordHash;
         this.salt = salt;
     }
 
@@ -17,8 +17,8 @@ public class User {
         return email;
     }
 
-    public byte[] getPassword() {
-        return password;
+    public byte[] getPasswordHash() {
+        return passwordHash;
     }
 
     public byte[] getSalt() {
