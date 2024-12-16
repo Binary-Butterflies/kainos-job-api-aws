@@ -24,7 +24,7 @@ public class JwtAuthenticator implements Authenticator<String, JwtToken> {
                     .parseSignedClaims(token)
                     .getPayload();
 
-            String username = claims.get("Username", String.class);
+            String username = claims.get("email", String.class);
 
             JwtToken jwtToken = new JwtToken(username);
             return Optional.of(jwtToken);
