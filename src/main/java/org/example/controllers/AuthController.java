@@ -19,7 +19,7 @@ import java.sql.SQLException;
 @Api("Auth API")
 @Path("/api/auth")
 public class AuthController {
-    AuthService authService;
+    final AuthService authService;
 
     public AuthController(final AuthService service) {
         this.authService = service;
@@ -61,11 +61,6 @@ public class AuthController {
                  | InvalidKeySpecException e) {
             return Response
                     .serverError()
-                    .entity(e.getMessage())
-                    .build();
-        } catch (InvalidException e) {
-            return Response
-                    .status(Response.Status.BAD_REQUEST)
                     .entity(e.getMessage())
                     .build();
         }

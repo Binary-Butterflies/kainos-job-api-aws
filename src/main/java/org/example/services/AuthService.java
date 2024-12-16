@@ -56,7 +56,7 @@ public class AuthService {
     }
 
     public void registerUser(final RegisterRequest registerRequest)
-            throws FailedToCreateException, SQLException, InvalidException,
+            throws FailedToCreateException, SQLException,
             NoSuchAlgorithmException, InvalidKeySpecException {
         byte[] salt = generateSalt();
         byte[] passwordHash = hashPassword(
