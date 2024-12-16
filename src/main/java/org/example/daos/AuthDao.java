@@ -52,7 +52,7 @@ public class AuthDao {
             statement.setBytes(SALT_PARAM_INDEX, salt);
 
             int modifiedRows = statement.executeUpdate();
-            return modifiedRows != 1;
+            return modifiedRows == 1;
         }
     }
 }
