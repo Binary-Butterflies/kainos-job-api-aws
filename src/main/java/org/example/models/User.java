@@ -1,9 +1,9 @@
 package org.example.models;
 
 public class User {
-    String email;
-    byte[] passwordHash;
-    byte[] salt;
+    final String email;
+    final byte[] passwordHash;
+    final byte[] salt;
 
     public User(final String email,
                 final byte[] passwordHash,
