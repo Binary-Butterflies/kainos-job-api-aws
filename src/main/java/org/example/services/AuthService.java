@@ -8,6 +8,8 @@ import org.example.exceptions.InvalidException;
 import org.example.models.LoginRequest;
 import org.example.models.RegisterRequest;
 import org.example.models.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
@@ -21,6 +23,8 @@ import java.sql.SQLException;
 import java.util.Arrays;
 
 public class AuthService {
+    static final Logger LOGGER = LoggerFactory.getLogger(AuthService.class);
+
     static final int TOKEN_LIFETIME =
             Integer.parseInt(System.getenv().get("TOKEN_LIFETIME"));
 
@@ -40,6 +44,9 @@ public class AuthService {
     public String login(final LoginRequest loginRequest)
             throws SQLException, InvalidException, NoSuchAlgorithmException,
             InvalidKeySpecException {
+        LOGGER.info("Logging in user \"{}\"",
+                loginRequest.getEmail());
+
         User user = authDao.getUser(loginRequest);
 
         if (user == null) {
@@ -58,6 +65,9 @@ public class AuthService {
     public void registerUser(final RegisterRequest registerRequest)
             throws FailedToCreateException, SQLException,
             NoSuchAlgorithmException, InvalidKeySpecException {
+        LOGGER.info("Registering user \"{}\"",
+                registerRequest.getEmail());
+
         byte[] salt = generateSalt();
         byte[] passwordHash = hashPassword(
                 registerRequest.getPassword(), salt);
@@ -79,6 +89,8 @@ public class AuthService {
     }
 
     byte[] generateSalt() {
+        LOGGER.debug("Generating Salt");
+
         SecureRandom random = new SecureRandom();
         byte[] salt = new byte[SALT_LENGTH];
         random.nextBytes(salt);
@@ -88,6 +100,8 @@ public class AuthService {
 
     byte[] hashPassword(final String password, final byte[] salt)
             throws NoSuchAlgorithmException, InvalidKeySpecException {
+        LOGGER.debug("Hashing password");
+
         KeySpec spec = new PBEKeySpec(
                 password.toCharArray(), salt, HASH_ITERATIONS, HASH_LENGTH);
         SecretKeyFactory factory = SecretKeyFactory.getInstance(HASH_ALGORITHM);
@@ -96,6 +110,9 @@ public class AuthService {
     }
 
     String generateJwtToken(final User user) {
+        LOGGER.debug("Generating JWT Token for user \"{}\"",
+                user.getEmail());
+
         return Jwts.builder()
                 .issuedAt(new Date(System.currentTimeMillis()))
                 .expiration(
