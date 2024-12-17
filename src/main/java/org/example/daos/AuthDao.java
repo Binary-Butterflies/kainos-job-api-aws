@@ -1,8 +1,11 @@
 package org.example.daos;
 
+import org.example.controllers.AuthController;
 import org.example.models.LoginRequest;
 import org.example.models.RegisterRequest;
 import org.example.models.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,6 +13,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class AuthDao {
+    static final Logger LOGGER = LoggerFactory.getLogger(AuthDao.class);
+
     static final int EMAIL_PARAM_INDEX = 1;
     static final int PASSWORD_HASH_PARAM_INDEX = 2;
     static final int SALT_PARAM_INDEX = 3;
@@ -25,6 +30,9 @@ public class AuthDao {
             ResultSet resultSet = statement.executeQuery();
 
             if (!resultSet.next()) {
+                LOGGER.warn("Failed to find any users (email: {})",
+                        loginRequest.getEmail());
+
                 return null;
             }
 
@@ -52,7 +60,14 @@ public class AuthDao {
             statement.setBytes(SALT_PARAM_INDEX, salt);
 
             int modifiedRows = statement.executeUpdate();
-            return modifiedRows == 1;
+
+            if (modifiedRows != 1) {
+                LOGGER.warn("Failed to add User (Rows modified: {})",
+                        modifiedRows);
+                return false;
+            }
+
+            return true;
         }
     }
 }
