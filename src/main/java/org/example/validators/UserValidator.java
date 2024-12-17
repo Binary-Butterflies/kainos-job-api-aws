@@ -10,6 +10,11 @@ public final class UserValidator {
 
     public static void validateRegistrationRequest(
             final RegisterRequest registerRequest) throws InvalidException {
+        if (registerRequest.getPassword().isEmpty()) {
+            throw new InvalidException(Entity.USER,
+                    "Password cannot be blank");
+        }
+
         if (!isValidEmail(registerRequest.getEmail())) {
             throw new InvalidException(Entity.USER,
                     "Invalid email \""
