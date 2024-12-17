@@ -73,6 +73,12 @@ public class AuthController {
                     .serverError()
                     .entity(e.getMessage())
                     .build();
+        } catch (InvalidException e) {
+            LOGGER.error(e.toString());
+            return Response
+                    .status(Response.Status.BAD_REQUEST)
+                    .entity(e.getMessage())
+                    .build();
         }
     }
 }
