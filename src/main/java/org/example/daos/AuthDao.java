@@ -1,6 +1,5 @@
 package org.example.daos;
 
-import org.example.controllers.AuthController;
 import org.example.models.LoginRequest;
 import org.example.models.RegisterRequest;
 import org.example.models.User;

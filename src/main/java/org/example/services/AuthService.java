@@ -8,6 +8,7 @@ import org.example.exceptions.InvalidException;
 import org.example.models.LoginRequest;
 import org.example.models.RegisterRequest;
 import org.example.models.User;
+import org.example.validators.UserValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -64,9 +65,12 @@ public class AuthService {
 
     public void registerUser(final RegisterRequest registerRequest)
             throws FailedToCreateException, SQLException,
-            NoSuchAlgorithmException, InvalidKeySpecException {
+            NoSuchAlgorithmException, InvalidKeySpecException,
+            InvalidException {
         LOGGER.info("Registering user \"{}\"",
                 registerRequest.getEmail());
+
+        UserValidator.validateRegistrationRequest(registerRequest);
 
         byte[] salt = generateSalt();
         byte[] passwordHash = hashPassword(
