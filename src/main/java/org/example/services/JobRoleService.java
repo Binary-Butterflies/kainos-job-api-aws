@@ -26,7 +26,7 @@ public class JobRoleService {
         List<JobRole> jobRoles = jobRoleDao.getAllJobRoles();
         LOGGER.debug("Total job roles: {}", jobRoles.size());
 
-        LOGGER.info("Mapping JobRole list to JobRoleResponse list");
+        LOGGER.debug("Mapping JobRole list to JobRoleResponse list");
         return JobRoleMapper.mapJobRoleListToJobRoleResponseList(jobRoles);
     }
 }
