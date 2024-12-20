@@ -15,9 +15,9 @@ public final class JobRoleMapper {
                 jobRole.getJobRoleId(),
                 jobRole.getRoleName(),
                 jobRole.getLocation(),
-                jobRole.getCapabilityId(),
-                jobRole.getBandId(),
-                jobRole.getClosingDate()
+                jobRole.getClosingDate(),
+                jobRole.getBand(),
+                jobRole.getCapability()
         );
     }
 

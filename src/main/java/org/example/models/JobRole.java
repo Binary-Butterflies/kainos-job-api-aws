@@ -6,24 +6,24 @@ public class JobRole {
     private final int jobRoleId;
     private final String roleName;
     private final String location;
-    private final int capabilityId;
-    private final int bandId;
     private final Date closingDate;
+    private final Band band;
+    private final Capability capability;
 
     public JobRole(
             final int jobRoleId,
             final String roleName,
             final String location,
-            final int capabilityId,
-            final int bandId,
-            final Date closingDate
+            final Date closingDate,
+            final Band band,
+            final Capability capability
     ) {
         this.jobRoleId = jobRoleId;
         this.roleName = roleName;
         this.location = location;
-        this.capabilityId = capabilityId;
-        this.bandId = bandId;
         this.closingDate = closingDate;
+        this.band = band;
+        this.capability = capability;
     }
 
     public int getJobRoleId() {
@@ -38,16 +38,15 @@ public class JobRole {
         return location;
     }
 
-    public int getCapabilityId() {
-        return capabilityId;
-    }
-
-    public int getBandId() {
-        return bandId;
-    }
-
     public Date getClosingDate() {
         return closingDate;
     }
-}
 
+    public Capability getCapability() {
+        return capability;
+    }
+
+    public Band getBand() {
+        return band;
+    }
+}
