@@ -1,5 +1,7 @@
 package org.example.controllers;
 
+import org.example.models.Band;
+import org.example.models.Capability;
 import org.example.models.JobRoleResponse;
 import org.example.services.JobRoleService;
 import org.junit.jupiter.api.Test;
@@ -25,9 +27,9 @@ public class JobRoleControllerTest {
             1,
             "Software Engineer",
             "London",
-            1,
-            2,
-            null
+            null,
+            new Band(2, "Senior"),
+            new Capability(2, "Project Manager")
     ));
 
     @Test

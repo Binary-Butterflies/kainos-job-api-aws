@@ -1,6 +1,8 @@
 package org.example.services;
 
 import org.example.daos.JobRoleDao;
+import org.example.models.Band;
+import org.example.models.Capability;
 import org.example.models.JobRole;
 import org.example.models.JobRoleResponse;
 import org.junit.jupiter.api.Test;
@@ -25,9 +27,9 @@ public class JobRoleServiceTest {
             1,
             "Software Engineer",
             "London",
-            1,
-            2,
-            null
+            null,
+            new Band(2, "Senior"),
+            new Capability(2, "Project Manager")
     ));
 
     @Test
