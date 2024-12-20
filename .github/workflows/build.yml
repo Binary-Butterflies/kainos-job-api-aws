@@ -28,4 +28,11 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Build with Maven
+      env:
+        DB_USERNAME: ${{ secrets.DB_USERNAME }}
+        DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+        DB_NAME: ${{ secrets.DB_TEST_NAME }}
+        DB_HOST: ${{ secrets.DB_HOST }}
+        TOKEN_LIFETIME: ${{ secrets.TOKEN_LIFETIME }}
+        JWT_ISSUER: ${{ secrets.JWT_ISSUER }}
       run: mvn -B package --file pom.xml
