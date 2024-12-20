@@ -17,8 +17,8 @@ public class UserValidatorTest {
                         "MyPassword123"
                 )));
 
-        assertEquals(thrown.getMessage(),
-                "User is not valid: Invalid email \"thisisnotanemail\"");
+        assertEquals("User is not valid: Invalid email \"thisisnotanemail\"",
+                thrown.getMessage());
     }
 
     @Test
@@ -61,7 +61,7 @@ public class UserValidatorTest {
                         ""
                 )));
 
-        assertEquals(thrown.getMessage(),
-                "User is not valid: Password cannot be blank");
+        assertEquals("User is not valid: Password cannot be blank",
+                thrown.getMessage());
     }
 }
