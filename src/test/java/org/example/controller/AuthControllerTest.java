@@ -73,7 +73,7 @@ public class AuthControllerTest {
     void register_shouldReturnNoContent_whenUserIsRegistered() {
         Response response = authController.register(registerRequest);
 
-        assertEquals(204, response.getStatus());
+        assertEquals(201, response.getStatus());
         assertNull(response.getEntity());
     }
 

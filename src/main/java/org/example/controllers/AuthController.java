@@ -63,7 +63,7 @@ public class AuthController {
             authService.registerUser(registerRequest);
 
             return Response
-                    .noContent()
+                    .status(Response.Status.CREATED)
                     .build();
         } catch (FailedToCreateException
                  | SQLException | NoSuchAlgorithmException
