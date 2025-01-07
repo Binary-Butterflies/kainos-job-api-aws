@@ -70,7 +70,7 @@ public class AuthService {
         LOGGER.info("Registering user \"{}\"",
                 registerRequest.getEmail());
 
-        UserValidator.validateRegistrationRequest(registerRequest);
+        UserValidator.validateRegistrationRequest(registerRequest, this);
 
         byte[] salt = generateSalt();
         byte[] passwordHash = hashPassword(
@@ -81,6 +81,11 @@ public class AuthService {
         if (!success) {
             throw new FailedToCreateException(Entity.USER);
         }
+    }
+
+    public boolean doesUserExists(final String email) throws SQLException {
+        LOGGER.debug("Checking if user \"{}\"", email);
+        return authDao.doesUserExist(email);
     }
 
     boolean verifyPassword(final String password,

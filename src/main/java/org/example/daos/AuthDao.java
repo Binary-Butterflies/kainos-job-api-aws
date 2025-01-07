@@ -69,4 +69,17 @@ public class AuthDao {
             return true;
         }
     }
+
+    public boolean doesUserExist(final String email)throws SQLException {
+        try (Connection connection = DatabaseConnector.getConnection()) {
+            String query = "SELECT 1 "
+                    + "FROM `user` WHERE BINARY email = ?;";
+
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(EMAIL_PARAM_INDEX, email);
+
+            ResultSet resultSet = statement.executeQuery();
+            return resultSet.next();
+        }
+    }
 }
