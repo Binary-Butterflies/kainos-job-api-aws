@@ -29,10 +29,14 @@ public class AuthService {
     static final int TOKEN_LIFETIME =
             Integer.parseInt(System.getenv().get("TOKEN_LIFETIME"));
 
-    static final int SALT_LENGTH = 16;
-    static final String HASH_ALGORITHM = "PBKDF2WithHmacSHA1";
-    static final int HASH_LENGTH = 128;
-    static final int HASH_ITERATIONS = 65536;
+    static final int SALT_LENGTH =
+            Integer.parseInt(System.getenv().get("PASS_SALT_LENGTH"));
+    static final String HASH_ALGORITHM =
+            System.getenv().get("PASS_HASH_ALGORITHM");
+    static final int HASH_LENGTH =
+            Integer.parseInt(System.getenv().get("PASS_HASH_LENGTH"));
+    static final int HASH_ITERATIONS =
+            Integer.parseInt(System.getenv().get("PASS_HASH_ITERATIONS"));
 
     final AuthDao authDao;
     final Key key;
