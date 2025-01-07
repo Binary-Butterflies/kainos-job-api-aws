@@ -7,10 +7,13 @@ import io.federecio.dropwizard.swagger.SwaggerBundle;
 import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
 import io.jsonwebtoken.Jwts;
 import org.example.controllers.AuthController;
+import org.example.controllers.JobRoleController;
 import org.example.controllers.TestController;
 import org.example.daos.AuthDao;
+import org.example.daos.JobRoleDao;
 import org.example.daos.TestDao;
 import org.example.services.AuthService;
+import org.example.services.JobRoleService;
 import org.example.services.TestService;
 
 import javax.crypto.SecretKey;
@@ -40,6 +43,8 @@ public class TestApplication extends Application<TestConfiguration> {
 
         environment.jersey()
                 .register(new TestController(new TestService(new TestDao())));
+        environment.jersey().register(new JobRoleController(
+                new JobRoleService(new JobRoleDao())));
         environment.jersey()
                 .register(new AuthController(authService));
     }
