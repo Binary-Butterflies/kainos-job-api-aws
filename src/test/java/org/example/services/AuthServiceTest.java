@@ -5,13 +5,12 @@ import org.apache.commons.codec.DecoderException;
 import org.example.daos.AuthDao;
 import org.example.exceptions.InvalidException;
 import org.example.models.LoginRequest;
+import org.example.models.RegisterRequest;
 import org.example.models.User;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import javax.crypto.SecretKey;
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
 import java.sql.SQLException;
 import org.apache.commons.codec.binary.Hex;
 
