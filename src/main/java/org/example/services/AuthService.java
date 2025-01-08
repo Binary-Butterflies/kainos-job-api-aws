@@ -132,7 +132,8 @@ public class AuthService {
                         new Date(System.currentTimeMillis()
                                 + TOKEN_LIFETIME
                         ))
-                .claim("email", user.getEmail())
+                .claim("Email", user.getEmail())
+                .claim("Role", user.getRoleId())
                 .subject(user.getEmail())
                 .issuer(System.getenv().get("JWT_ISSUER"))
                 .signWith(key)
