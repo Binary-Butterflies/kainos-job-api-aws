@@ -43,4 +43,7 @@ jobs:
         TOKEN_LIFETIME: ${{ secrets.TOKEN_LIFETIME }}
         AUTH_TEST_PASS_HASH: ${{ secrets.AUTH_TEST_PASS_HASH }}
         AUTH_TEST_PASS_SALT: ${{ secrets.AUTH_TEST_PASS_SALT }}
+
+        TEST_USER_EMAIL: ${{ secrets.TEST_USER_EMAIL }}
+        TEST_USER_PASSWORD: ${{ secrets.TEST_USER_PASSWORD }}
       run: mvn -B package --file pom.xml
