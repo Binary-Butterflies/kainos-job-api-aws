@@ -9,7 +9,11 @@ import javax.ws.rs.container.ContainerRequestContext;
 public class RoleAuthoriser implements Authorizer<JwtToken> {
     @Override
     public boolean authorize(final JwtToken jwtToken, final String roleName) {
-        return jwtToken.getUserRole().getRoleName().equals(roleName);
+        try {
+            return jwtToken.getUserRole().getRoleName().equals(roleName);
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     @Override
@@ -17,6 +21,10 @@ public class RoleAuthoriser implements Authorizer<JwtToken> {
             final JwtToken principal,
             final String role,
             @Nullable final ContainerRequestContext requestContext) {
-        return principal.getUserRole().getRoleName().equals(role);
+        try {
+            return principal.getUserRole().getRoleName().equals(role);
+        } catch (Exception e) {
+            return false;
+        }
     }
 }
