@@ -1,5 +1,6 @@
 package org.example.services;
 
+import io.dropwizard.auth.Auth;
 import io.jsonwebtoken.Jwts;
 import org.apache.commons.codec.DecoderException;
 import org.example.daos.AuthDao;
@@ -31,7 +32,8 @@ public class AuthServiceTest {
     User user = new User(
             "my_email@mail.com",
             Hex.decodeHex(System.getenv("AUTH_TEST_PASS_HASH")),
-            Hex.decodeHex(System.getenv("AUTH_TEST_PASS_SALT"))
+            Hex.decodeHex(System.getenv("AUTH_TEST_PASS_SALT")),
+            AuthDao.DEFAULT_ROLE_ID
     );
 
     String token = System.getenv("AUTH_TEST_JWT_TOKEN");

@@ -14,13 +14,16 @@ import java.sql.SQLException;
 public class AuthDao {
     static final Logger LOGGER = LoggerFactory.getLogger(AuthDao.class);
 
+    public static final int DEFAULT_ROLE_ID = 2;
+
     static final int EMAIL_PARAM_INDEX = 1;
     static final int PASSWORD_HASH_PARAM_INDEX = 2;
     static final int SALT_PARAM_INDEX = 3;
+    static final int ROLE_ID_PARAM_INDEX = 4;
 
     public User getUser(final LoginRequest loginRequest) throws SQLException {
         try (Connection connection = DatabaseConnector.getConnection()) {
-            String query = "SELECT email, passwordHash, salt "
+            String query = "SELECT email, passwordHash, salt, roleId "
                     + "FROM `user` WHERE BINARY email = ?;";
 
             PreparedStatement statement = connection.prepareStatement(query);
@@ -38,7 +41,8 @@ public class AuthDao {
             return new User(
                     resultSet.getString("email"),
                     resultSet.getBytes("passwordHash"),
-                    resultSet.getBytes("salt")
+                    resultSet.getBytes("salt"),
+                    resultSet.getInt("roleId")
             );
         }
     }
@@ -50,13 +54,14 @@ public class AuthDao {
     ) throws SQLException {
         try (Connection connection = DatabaseConnector.getConnection()) {
             String query = "INSERT INTO `user` "
-                    + "(email, passwordHash, salt) "
-                    + "VALUES (?, ?, ?);";
+                    + "(email, passwordHash, salt, roleId) "
+                    + "VALUES (?, ?, ?, ?);";
 
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(EMAIL_PARAM_INDEX, registerRequest.getEmail());
             statement.setBytes(PASSWORD_HASH_PARAM_INDEX, passwordHash);
             statement.setBytes(SALT_PARAM_INDEX, salt);
+            statement.setInt(ROLE_ID_PARAM_INDEX, DEFAULT_ROLE_ID);
 
             int modifiedRows = statement.executeUpdate();
 
