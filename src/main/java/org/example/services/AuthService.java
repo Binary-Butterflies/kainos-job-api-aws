@@ -12,6 +12,7 @@ import org.example.validators.UserValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import java.security.Key;
@@ -25,6 +26,7 @@ import java.util.Arrays;
 
 public class AuthService {
     static final Logger LOGGER = LoggerFactory.getLogger(AuthService.class);
+    public static final SecretKey JWT_KEY = Jwts.SIG.HS256.key().build();
 
     static final int TOKEN_LIFETIME =
             Integer.parseInt(System.getenv().get("TOKEN_LIFETIME"));
