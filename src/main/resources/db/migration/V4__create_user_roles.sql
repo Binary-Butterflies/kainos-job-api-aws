@@ -1,6 +1,6 @@
 CREATE TABLE `role` (
     roleId INT NOT NULL DEFAULT 2,
-    roleName VARCHAR(32) NOT NULL,
+    roleName VARCHAR(32) NOT NULL UNIQUE,
     CONSTRAINT pk_role PRIMARY KEY (roleId)
 );
 
