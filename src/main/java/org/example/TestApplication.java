@@ -8,7 +8,6 @@ import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import io.federecio.dropwizard.swagger.SwaggerBundle;
 import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
-import io.jsonwebtoken.Jwts;
 import org.example.auth.JwtAuthenticator;
 import org.example.auth.RoleAuthoriser;
 import org.example.controllers.AuthController;
@@ -22,8 +21,6 @@ import org.example.services.AuthService;
 import org.example.services.JobRoleService;
 import org.example.services.TestService;
 import org.glassfish.jersey.server.filter.RolesAllowedDynamicFeature;
-
-import javax.crypto.SecretKey;
 
 public class TestApplication extends Application<TestConfiguration> {
     public static void main(final String[] args) throws Exception {
@@ -57,11 +54,10 @@ public class TestApplication extends Application<TestConfiguration> {
     }
 
     AuthService initialiseAuthService(final Environment environment) {
-        SecretKey jwtKey = Jwts.SIG.HS256.key().build();
-
         environment.jersey().register(new AuthDynamicFeature(
                 new OAuthCredentialAuthFilter.Builder<JwtToken>()
-                        .setAuthenticator(new JwtAuthenticator(jwtKey))
+                        .setAuthenticator(
+                                new JwtAuthenticator(AuthService.JWT_KEY))
                         .setAuthorizer(new RoleAuthoriser())
                         .setPrefix("Bearer")
                         .buildAuthFilter()
@@ -72,6 +68,6 @@ public class TestApplication extends Application<TestConfiguration> {
                 new AuthValueFactoryProvider.Binder<>(JwtToken.class)
         );
 
-        return new AuthService(new AuthDao(), jwtKey);
+        return new AuthService(new AuthDao(), AuthService.JWT_KEY);
     }
 }
