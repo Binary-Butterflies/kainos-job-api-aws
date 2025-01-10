@@ -4,6 +4,7 @@ import io.swagger.annotations.Api;
 import org.example.exceptions.DoesNotExistException;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.Authorization;
+import org.example.models.JobRoleDetailedResponse;
 import org.example.models.JobRoleResponse;
 import org.example.models.UserRole;
 import org.example.services.JobRoleService;
@@ -64,7 +65,7 @@ public class JobRoleController {
     @ApiOperation(
             value = "Returns a specific job role",
             authorizations = @Authorization(value = HttpHeaders.AUTHORIZATION),
-            response = JobRoleResponse.class
+            response = JobRoleDetailedResponse.class
     )
     public Response getJobRoleById(@PathParam("id") final int id) {
         LOGGER.debug("/job-roles/{} hit", id);

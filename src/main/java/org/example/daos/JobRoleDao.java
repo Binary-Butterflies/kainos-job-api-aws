@@ -3,7 +3,7 @@ package org.example.daos;
 import org.example.models.Band;
 import org.example.models.Capability;
 import org.example.models.JobRole;
-import org.example.models.Details;
+import org.example.models.JobRoleDetails;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -43,7 +43,7 @@ public class JobRoleDao {
                                 resultSet.getString("bandName")),
                         new Capability(resultSet.getInt("capabilityId"),
                                 resultSet.getString("capabilityName")),
-                        new Details(
+                        new JobRoleDetails(
                                 resultSet.getString("description"),
                                 resultSet.getString("responsibilities"),
                                 resultSet.getString("sharepointURL"),
@@ -85,7 +85,7 @@ public class JobRoleDao {
                                 resultSet.getString("bandName")),
                         new Capability(resultSet.getInt("capabilityId"),
                                 resultSet.getString("capabilityName")),
-                        new Details(
+                        new JobRoleDetails(
                                 resultSet.getString("description"),
                                 resultSet.getString("responsibilities"),
                                 resultSet.getString("sharepointURL"),
