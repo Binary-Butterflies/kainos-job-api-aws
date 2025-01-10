@@ -1,13 +1,17 @@
 package org.example.services;
 
+import org.example.daos.DatabaseConnector;
 import org.example.daos.JobRoleDao;
+import org.example.exceptions.DoesNotExistException;
 import org.example.models.Band;
 import org.example.models.Capability;
 import org.example.models.JobRole;
+import org.example.models.Details;
 import org.example.models.JobRoleResponse;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -24,7 +28,10 @@ public class JobRoleServiceTest {
             "London",
             null,
             new Band(2, "Senior"),
-            new Capability(2, "Project Manager")
+            new Capability(2, "Project Manager"),
+            new Details("test",
+                                                "test",
+                                                "test",1,"test",1)
     ));
 
     @Test
@@ -46,4 +53,5 @@ public class JobRoleServiceTest {
         assertThrows(SQLException.class,
                 () -> jobRoleService.getAllJobRoles());
     }
+
 }

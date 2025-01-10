@@ -1,6 +1,7 @@
 package org.example.mappers;
 
 import org.example.models.JobRole;
+import org.example.models.JobRoleDetails;
 import org.example.models.JobRoleResponse;
 
 import java.util.List;
@@ -27,5 +28,12 @@ public final class JobRoleMapper {
         return jobRoles.stream()
                 .map(JobRoleMapper::mapJobRoleToJobRoleResponse)
                 .collect(Collectors.toList());
+    }
+
+    public static JobRoleDetails mapJobRoleToJobRoleDetails(
+            final JobRole jobRole) {
+        return new JobRoleDetails(
+                jobRole
+        );
     }
 }

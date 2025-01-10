@@ -1,5 +1,7 @@
 package org.example.controllers;
 
+import org.example.exceptions.DoesNotExistException;
+import org.example.exceptions.Entity;
 import org.example.models.Band;
 import org.example.models.Capability;
 import org.example.models.JobRoleResponse;
@@ -44,5 +46,27 @@ public class JobRoleControllerTest {
         Response response = jobRoleController.getJobRoles();
 
         assertEquals(500, response.getStatus());
+    }
+
+    @Test
+    void getJobRoleById_ThrowSqlException_Return500()
+            throws SQLException, DoesNotExistException {
+        when(jobRoleService.getJobRoleById(2)).thenThrow(
+                new SQLException());
+
+        Response response = jobRoleController.getJobRoleById(2);
+
+        assertEquals(500, response.getStatus());
+    }
+
+    @Test
+    void getJobRoleById_ThrowDoesNotExistException_Return500()
+            throws SQLException, DoesNotExistException {
+        when(jobRoleService.getJobRoleById(2)).thenThrow(
+                new DoesNotExistException(Entity.JOBROLE));
+
+        Response response = jobRoleController.getJobRoleById(2);
+
+        assertEquals(404, response.getStatus());
     }
 }
