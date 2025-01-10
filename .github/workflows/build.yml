@@ -28,4 +28,22 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Build with Maven
+      env:
+        DB_USERNAME: ${{ secrets.DB_USERNAME }}
+        DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+        DB_NAME: ${{ secrets.DB_TEST_NAME }}
+        DB_HOST: ${{ secrets.DB_HOST }}
+
+        PASS_SALT_LENGTH: ${{ secrets.PASS_SALT_LENGTH }}
+        PASS_HASH_LENGTH: ${{ secrets.PASS_HASH_LENGTH }}
+        PASS_HASH_ALGORITHM: ${{ secrets.PASS_HASH_ALGORITHM }}
+        PASS_HASH_ITERATIONS: ${{ secrets.PASS_HASH_ITERATIONS }}
+
+        JWT_ISSUER: ${{ secrets.JWT_ISSUER }}
+        TOKEN_LIFETIME: ${{ secrets.TOKEN_LIFETIME }}
+        AUTH_TEST_PASS_HASH: ${{ secrets.AUTH_TEST_PASS_HASH }}
+        AUTH_TEST_PASS_SALT: ${{ secrets.AUTH_TEST_PASS_SALT }}
+
+        TEST_USER_EMAIL: ${{ secrets.TEST_USER_EMAIL }}
+        TEST_USER_PASSWORD: ${{ secrets.TEST_USER_PASSWORD }}
       run: mvn -B package --file pom.xml
