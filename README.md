@@ -1,61 +1,68 @@
-# Java DropWizard Flyway Starter
+# Kainos Job API
 
-Database Migration - Local
+The backend for the Kainos Job Roles Application
+
 ---
 
-1. Add your SQL script to `resources.db.migration` directory
-2. Add the following lines to your ~/.zshrc file:
+## Migrations
 
-```
-export FLYWAY_URL="jdbc:mysql://YOUR_DB_HOST/YOUR_DB_NAME"
-export FLYWAY_USER="YOUR_DB_USERNAME"
-export FLYWAY_PASSWORD="YOUR_DB_PASSWORD"
-export FLYWAY_BASELINE_ON_MIGRATE=true
+The application uses Flyway to carry out the database migration scripts.
+
+### Environment Variables
+
+The following environment variables are required to run the migrations:
+
+```bash
+FLYWAY_URL=jdbc:mysql://{DB_URL}/{DB_NAME}
+FLYWAY_USER={YOUR_USERNAME}
+FLYWAY_PASSWORD={YOUR_PASSWORD}
+FLYWAY_BASELINE_ON_MIGRATE=true
 ```
 
-3. Reload your terminal session if required:
+**Note:** Ensure you replace the values inside of the curly braces.
 
-```
-. ~/.zshrc
-```
+### Running Migrations
 
-4. Run Flyway command through Maven:
+To run the migrations, execute the following command:
 
-```
+```bash
 mvn flyway:migrate
 ```
 
-Database Migration - Production
----
+## Building
 
-1. Add following secrets to your Github repo:
+The recommended way to build and run the project is using IntelliJ IDEA
 
-```
-DB_USERNAME - the prod db username
-DB_PASSWORD - the prod db password
-DB_HOST - the prod db host
-DB_NAME - the prod db name
-```
+### Environment File
 
-2. Raise a pull request with your script in the `resources.db.migration` directory
-3. After approvals, merge pull request; this will trigger the migration action to run in Github
-4. Ensure migration successfully runs against prod database
+To run the application, please create a `.env` file in the root of the project based on the `.env.template` file.
 
-How to start the test application
----
+### Configuration
 
-1. Set the following environment variables:
-    1. DB_USERNAME
-    2. DB_PASSWORD
-    3. DB_HOST
-    4. DB_NAME
-1. Run `mvn clean install` to build your application
-1. You can start application via:
-    1. Terminal: `java -jar target/java-swagger-flyway-starter-org.kainos.ea.jar server config.yml`
-    2. IDE: Edit run configuration -> Add `server` to program arguments -> Run
-1. To check that your application is running enter url `http://localhost:8080/api/test`
+Please create a new run configuration with the following parameters:
 
-Health Check
----
+![Build Config](assets/BuildConfig.png)
 
-To see your applications health enter url `http://localhost:8081/healthcheck`
+**Note:** Ensure the "Environment variables" field points to your `.env` file. If there issues using a local path, try the absolute path.
+
+### Running
+
+To run the application, execute the run configuration. The api can be found at [`http://localhost:8080`](http://localhost:8080)
+
+This application also hosts a Swagger page, which can be found at [`http://localhost:8080/swagger`](http://localhost:8080/swagger)
+
+## Health Check
+
+The current health of the application can be found at [`http://localhost:8081/healthcheck`](http://localhost:8081/healthcheck)
+
+## Testing
+
+The application uses JUnit as its testing suite.
+
+### Configuration
+
+![Test Config](assets/TestConfig.png)
+
+**Note:** Ensure the "Environment variables" field contains a semicolon separated list of the environment variables found in your `.env` file.
+
+**Note:** Currently, you cannot supply a path to your `.env` file for running tests.
