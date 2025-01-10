@@ -39,11 +39,13 @@ To run the application, please create a `.env` file in the root of the project b
 
 ### Configuration
 
-Please create a new run configuration with the following parameters:
+Please create a new "Application" run configuration with the following parameters:
 
-![Build Config](assets/BuildConfig.png)
+- **Main Class:** `org.example.TestApplication`
+- **Program Arguments:** `server`
+- **Environment variables:** Path to `.env` file 
 
-**Note:** Ensure the "Environment variables" field points to your `.env` file. If there issues using a local path, try the absolute path.
+**__Note:__** If there are issues using a local path, try using the absolute path instead.
 
 ### Running
 
@@ -61,8 +63,10 @@ The application uses JUnit as its testing suite.
 
 ### Configuration
 
-![Test Config](assets/TestConfig.png)
+Please create a new "JUnit" run configuration with the following parameters:
 
-**Note:** Ensure the "Environment variables" field contains a semicolon separated list of the environment variables found in your `.env` file.
+- **Resource Type:** "All in package" (Found in the dropdown)
+- **Package:** `org.example`
+- **Environment variables:** Semicolon-separated list of the environment variables
 
 **Note:** Currently, you cannot supply a path to your `.env` file for running tests.
