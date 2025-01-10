@@ -11,6 +11,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 import javax.ws.rs.client.Client;
 import java.util.List;
+import javax.ws.rs.core.Response;
 
 @ExtendWith(DropwizardExtensionsSupport.class)
 public class JobRoleIntegrationTest {
@@ -28,4 +29,5 @@ public class JobRoleIntegrationTest {
 
         Assertions.assertFalse(response.isEmpty());
     }
+
 }

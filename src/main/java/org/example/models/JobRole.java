@@ -9,6 +9,7 @@ public class JobRole {
     private final Date closingDate;
     private final Band band;
     private final Capability capability;
+    private final Details details;
 
     public JobRole(
             final int jobRoleId,
@@ -16,7 +17,8 @@ public class JobRole {
             final String location,
             final Date closingDate,
             final Band band,
-            final Capability capability
+            final Capability capability,
+            final Details details
     ) {
         this.jobRoleId = jobRoleId;
         this.roleName = roleName;
@@ -24,6 +26,7 @@ public class JobRole {
         this.closingDate = closingDate;
         this.band = band;
         this.capability = capability;
+        this.details = details;
     }
 
     public int getJobRoleId() {
@@ -49,4 +52,7 @@ public class JobRole {
     public Band getBand() {
         return band;
     }
+
+    public Details getDetails() {
+        return details; }
 }
