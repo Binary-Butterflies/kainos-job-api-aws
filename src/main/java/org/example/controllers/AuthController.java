@@ -1,6 +1,9 @@
 package org.example.controllers;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiKeyAuthDefinition;
+import io.swagger.annotations.SecurityDefinition;
+import io.swagger.annotations.SwaggerDefinition;
 import org.example.exceptions.FailedToCreateException;
 import org.example.exceptions.InvalidException;
 import org.example.models.LoginRequest;
@@ -12,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.security.NoSuchAlgorithmException;
@@ -20,6 +24,17 @@ import java.sql.SQLException;
 
 @Api("Auth API")
 @Path("/api/auth")
+@SwaggerDefinition(
+    securityDefinition = @SecurityDefinition(
+        apiKeyAuthDefinitions = {
+            @ApiKeyAuthDefinition(
+                    key = HttpHeaders.AUTHORIZATION,
+                    name = HttpHeaders.AUTHORIZATION,
+                    in = ApiKeyAuthDefinition.ApiKeyLocation.HEADER
+            )
+        }
+    )
+)
 public class AuthController {
     static final Logger LOGGER = LoggerFactory.getLogger(AuthController.class);
 
