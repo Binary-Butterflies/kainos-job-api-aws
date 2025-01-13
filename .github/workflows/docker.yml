@@ -42,7 +42,7 @@ jobs:
         TEST_USER_PASSWORD: ${{ secrets.TEST_USER_PASSWORD }}
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         ECR_REPOSITORY: kainos-job-api
-        IMAGE_TAG: team1-api
+        IMAGE_TAG: ${{ github.sha }}
       run: |
         docker build --build-arg DB_PASSWORD=${DB_PASSWORD} --build-arg DB_USERNAME=${DB_USERNAME} --build-arg DB_HOST=${DB_HOST} --build-arg DB_NAME=${DB_NAME} -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
