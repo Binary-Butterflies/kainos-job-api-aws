@@ -59,7 +59,6 @@ public class JobRoleDao {
         return jobRoles;
     }
 
-
     public JobRole getJobRoleById(final int id) throws SQLException {
         try (Connection connection = DatabaseConnector.getConnection()) {
             LOGGER.info("Executing query to get all job role by id");

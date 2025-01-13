@@ -26,9 +26,7 @@ public class JobRoleServiceTest {
             null,
             new Band(2, "Senior"),
             new Capability(2, "Project Manager"),
-            new JobRoleDetails("test",
-                                                "test",
-                                                "test",1,"test",1)
+            new JobRoleDetails("test", "test", "test", 1, "test", 1)
     ));
 
     @Test
