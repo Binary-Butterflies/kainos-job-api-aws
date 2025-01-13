@@ -44,5 +44,19 @@ jobs:
         ECR_REPOSITORY: kainos-job-api
         IMAGE_TAG: ${{ github.sha }}
       run: |
-        docker build --build-arg DB_PASSWORD=${DB_PASSWORD} --build-arg DB_USERNAME=${DB_USERNAME} --build-arg DB_HOST=${DB_HOST} --build-arg DB_NAME=${DB_NAME} -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+        docker build --build-arg DB_PASSWORD=${DB_PASSWORD} \
+        --build-arg DB_USERNAME=${DB_USERNAME} \
+        --build-arg DB_HOST=${DB_HOST} \
+        --build-arg DB_NAME=${DB_NAME} \
+        --build-arg PASS_SALT_LENGTH=${PASS_SALT_LENGTH} \
+        --build-arg PASS_HASH_LENGTH=${PASS_HASH_LENGTH} \
+        --build-arg PASS_HASH_ALGORITHM=${PASS_HASH_ALGORITHM} \
+        --build-arg PASS_HASH_ITERATIONS=${PASS_HASH_ITERATIONS} \
+        --build-arg JWT_ISSUER=${JWT_ISSUER} \
+        --build-arg TOKEN_LIFETIME=${TOKEN_LIFETIME} \
+        --build-arg AUTH_TEST_PASS_HASH=${AUTH_TEST_PASS_HASH} \
+        --build-arg AUTH_TEST_PASS_SALT=${AUTH_TEST_PASS_SALT} \
+        --build-arg TEST_USER_EMAIL=${TEST_USER_EMAIL} \
+        --build-arg TEST_USER_PASSWORD=${TEST_USER_PASSWORD} \
+        -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
